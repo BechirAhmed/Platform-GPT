@@ -52,7 +52,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                         _buildScreenTitle(
                           screenTitle: "Creation d\\'une demande  One".tr,
                           onTapScreenTitle: () => onTapScreenTitle(
-                              AppRoutes.creationDUneDemandeOneScreen),
+                              AppRoutes.mainClassScreen),
                         ),
                         _buildScreenTitle(
                           screenTitle: "Splash Screen".tr,
@@ -77,7 +77,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                         _buildScreenTitle(
                           screenTitle: "Profile One".tr,
                           onTapScreenTitle: () =>
-                              onTapScreenTitle(AppRoutes.profileOneScreen),
+                              onTapScreenTitle(AppRoutes.demandDetailsScreen),
                         ),
                         _buildScreenTitle(
                           screenTitle: "Profile".tr,

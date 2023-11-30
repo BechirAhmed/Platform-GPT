@@ -1,3 +1,5 @@
+import 'package:get_storage/get_storage.dart';
+
 import 'controller/profile_controller.dart';
 import 'package:bgpt/core/app_export.dart';
 import 'package:bgpt/widgets/custom_icon_button.dart';
@@ -9,93 +11,102 @@ class ProfileScreen extends GetWidget<ProfileController> {
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
+
     return SafeArea(
         child: Scaffold(
-            body: SizedBox(
-                width: mediaQueryData.size.width,
-                child: SingleChildScrollView(
-                    child: Container(
-                        margin: EdgeInsets.only(left: 1.h),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 17.h, vertical: 4.v),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadiusStyle.roundedBorder42),
-                        child: Column(children: [
-                          _buildArrowLeftSection(),
-                          SizedBox(height: 50.v),
-                          _buildSixtySevenSection(),
-                          SizedBox(height: 24.v),
-                          _buildSixtyEightSection(),
-                          SizedBox(height: 24.v),
-                          _buildSixtyNineSection(),
-                          SizedBox(height: 24.v)
-                        ])))),
-            bottomNavigationBar: _buildBottomBarSection()));
+            body: GetBuilder<ProfileController>(
+              builder: (px) {
+                return SizedBox(
+                    width: mediaQueryData.size.width,
+                    child: SingleChildScrollView(
+                        child: Container(
+                            margin: EdgeInsets.only(left: 1.h),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 17.h, vertical: 4.v),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadiusStyle.roundedBorder42),
+                            child: Column(children: [
+                              _buildArrowLeftSection(),
+                              SizedBox(height: 50.v),
+                              _buildSixtySevenSection(),
+                              SizedBox(height: 24.v),
+                              _buildSixtyEightSection(),
+                              SizedBox(height: 24.v),
+                              _buildSixtyNineSection(),
+                              SizedBox(height: 24.v)
+                            ]))));
+              },
+            )
+        ));
   }
 
   /// Section Widget
   Widget _buildArrowLeftSection() {
-    return Padding(
-        padding: EdgeInsets.only(right: 10.h),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                  padding: EdgeInsets.only(bottom: 151.v),
-                  child: CustomIconButton(
-                      height: 40.adaptSize,
-                      width: 40.adaptSize,
-                      padding: EdgeInsets.all(12.h),
-                      decoration: IconButtonStyleHelper.outlineGray,
-                      onTap: () {
-                        onTapBtnArrowLeft();
-                      },
-                      child: CustomImageView(
-                          imagePath: ImageConstant.imgArrowLeft))),
-              Padding(
-                  padding: EdgeInsets.only(left: 21.h, top: 5.v),
-                  child: Column(children: [
-                    SizedBox(
-                        height: 134.v,
-                        width: 137.h,
-                        child: Stack(alignment: Alignment.topLeft, children: [
-                          CustomImageView(
-                              imagePath: ImageConstant.imgRectangle6,
-                              height: 120.adaptSize,
-                              width: 120.adaptSize,
-                              alignment: Alignment.topLeft,
-                              margin: EdgeInsets.only(left: 1.h, top: 3.v)),
-                          CustomImageView(
-                              imagePath: ImageConstant.imgSubtract,
-                              height: 125.v,
-                              width: 122.h,
-                              radius: BorderRadius.circular(61.h),
-                              alignment: Alignment.topLeft),
-                          CustomIconButton(
-                              height: 46.adaptSize,
-                              width: 46.adaptSize,
-                              padding: EdgeInsets.all(11.h),
-                              decoration:
-                                  IconButtonStyleHelper.outlineOnErrorContainer,
-                              alignment: Alignment.bottomRight,
-                              child: CustomImageView(
-                                  imagePath:
-                                      ImageConstant.imgLineDesignEditLine))
-                        ])),
-                    SizedBox(height: 1.v),
-                    Text("lbl_mohamed_mohamed".tr,
-                        style: CustomTextStyles.titleLargePoppins),
-                    Text("msg_908342081_36367789".tr,
-                        style: theme.textTheme.bodyMedium)
-                  ])),
-              Spacer(),
-              CustomImageView(
-                  imagePath: ImageConstant.imgNotification,
-                  height: 20.v,
-                  width: 16.h,
-                  margin: EdgeInsets.only(top: 13.v, bottom: 157.v))
-            ]));
+
+    return GetBuilder<ProfileController>(
+      builder: (context) {
+        return Padding(
+            padding: EdgeInsets.only(right: 10.h),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                      padding: EdgeInsets.only(bottom: 151.v),
+                      child: CustomIconButton(
+                          height: 40.adaptSize,
+                          width: 40.adaptSize,
+                          padding: EdgeInsets.all(12.h),
+                          decoration: IconButtonStyleHelper.outlineGray,
+                          onTap: () {
+                            // onTapBtnArrowLeft();
+                          },
+                          child: Icon(Icons.logout)
+                      )),
+                  Padding(
+                      padding: EdgeInsets.only(top: 5.v),
+                      child: Column(
+                          children: [
+                        SizedBox(
+                            height: 134.v,
+                            width: 137.h,
+                            child: Stack(alignment: Alignment.topLeft, children: [
+                              CustomImageView(
+                                  imagePath: ImageConstant.imgRectangle6,
+                                  height: 120.adaptSize,
+                                  width: 120.adaptSize,
+                                  alignment: Alignment.topLeft,
+                                  margin: EdgeInsets.only(left: 1.h, top: 3.v)),
+                              CustomImageView(
+                                  imagePath: ImageConstant.imgSubtract,
+                                  height: 125.v,
+                                  width: 122.h,
+                                  radius: BorderRadius.circular(61.h),
+                                  alignment: Alignment.topLeft),
+                              CustomIconButton(
+                                  height: 46.adaptSize,
+                                  width: 46.adaptSize,
+                                  padding: EdgeInsets.all(11.h),
+                                  decoration:
+                                      IconButtonStyleHelper.outlineOnErrorContainer,
+                                  alignment: Alignment.bottomRight,
+                                  child: CustomImageView(
+                                      imagePath:
+                                          ImageConstant.imgLineDesignEditLine))
+                            ])),
+                        SizedBox(height: 1.v),
+                        Text("${controller.userData?['full_name']}",
+                            style: CustomTextStyles.titleLargePoppins),
+                        Text("${controller.user?.numero_phone}",
+                            style: theme.textTheme.bodyMedium)
+                      ])),
+                  CustomImageView(
+                      imagePath: ImageConstant.imgNotification,
+                      height: 20.v,
+                      width: 16.h,
+                      margin: EdgeInsets.only(top: 13.v, bottom: 157.v))
+                ]));
+      }
+    );
   }
 
   /// Section Widget
@@ -111,37 +122,31 @@ class ProfileScreen extends GetWidget<ProfileController> {
             children: [
               SizedBox(height: 3.v),
               Padding(
-                  padding: EdgeInsets.only(right: 6.h),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomImageView(
-                            imagePath: ImageConstant.imgLineBusinessProfileLine,
-                            height: 24.adaptSize,
-                            width: 24.adaptSize),
-                        Padding(
-                            padding: EdgeInsets.only(
-                                left: 13.h, top: 3.v, bottom: 3.v),
-                            child: RichText(
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                      text: "msg_date_de_naissance2".tr,
-                                      style: theme.textTheme.bodyMedium),
-                                  TextSpan(
-                                      text: "lbl_22_06_1967".tr,
-                                      style:
-                                          CustomTextStyles.bodyMediumPrimary_1)
-                                ]),
-                                textAlign: TextAlign.left))
-                      ])),
+                  padding: EdgeInsets.only(right: 8.h),
+                  child: _buildComponentThirteen(
+                      ImageConstant.imgLineBusinessProfileLine,
+                      "msg_date_de_naissance2",
+                      "${controller.userData?['birthdate']}"
+                  )
+              ),
               SizedBox(height: 11.v),
               Padding(
                   padding: EdgeInsets.only(right: 8.h),
-                  child: _buildComponentThirteen()),
+                  child: _buildComponentThirteen(
+                    ImageConstant.imgLineCommunicat,
+                    "Genre",
+                    "${controller.userData?['sex']}"
+                  )
+              ),
               SizedBox(height: 13.v),
               Padding(
                   padding: EdgeInsets.only(right: 8.h),
-                  child: _buildComponentThirteen())
+                  child: _buildComponentThirteen(
+                    ImageConstant.imgLineEditorTranslate2,
+                    "lbl_nationalit",
+                    "${controller.userData?['nationality']}"
+                  )
+              )
             ]));
   }
 
@@ -158,30 +163,22 @@ class ProfileScreen extends GetWidget<ProfileController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                  padding: EdgeInsets.only(right: 11.h),
-                  child: Row(children: [
-                    CustomImageView(
-                        imagePath: ImageConstant.imgLineBusinessP,
-                        height: 24.adaptSize,
-                        width: 24.adaptSize),
-                    Padding(
-                        padding:
-                            EdgeInsets.only(left: 13.h, top: 4.v, bottom: 2.v),
-                        child: RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: "msg_num_ro_du_passeport2".tr,
-                                  style: theme.textTheme.bodyMedium),
-                              TextSpan(
-                                  text: "lbl_2031as2891".tr,
-                                  style: CustomTextStyles.bodyMediumPrimary_1)
-                            ]),
-                            textAlign: TextAlign.left))
-                  ])),
+                  padding: EdgeInsets.only(right: 8.h),
+                  child: _buildComponentThirteen(
+                      ImageConstant.imgLineBusinessP,
+                      "msg_num_ro_du_passeport2",
+                      "${controller.userData?['passport']}"
+                  )
+              ),
               SizedBox(height: 11.v),
               Padding(
                   padding: EdgeInsets.only(right: 8.h),
-                  child: _buildComponentThirteen())
+                  child: _buildComponentThirteen(
+                      ImageConstant.imgLineEditorTranslate2,
+                      "Lieu de delivrance",
+                    "${controller.userData?['passport_delivrance']}"
+                  )
+              )
             ]));
   }
 
@@ -200,84 +197,31 @@ class ProfileScreen extends GetWidget<ProfileController> {
             children: [
               SizedBox(height: 3.v),
               Padding(
-                  padding: EdgeInsets.only(right: 14.h),
-                  child: Row(children: [
-                    CustomImageView(
-                        imagePath: ImageConstant.imgLineUserContactsLine,
-                        height: 24.adaptSize,
-                        width: 24.adaptSize),
-                    Padding(
-                        padding:
-                            EdgeInsets.only(left: 13.h, top: 4.v, bottom: 2.v),
-                        child: RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: "lbl_lieu_de_sejour".tr,
-                                  style: theme.textTheme.bodyMedium),
-                              TextSpan(
-                                  text: "lbl_toujounin".tr,
-                                  style: CustomTextStyles.bodyMediumPrimary_1)
-                            ]),
-                            textAlign: TextAlign.left))
-                  ])),
+                  padding: EdgeInsets.only(right: 8.h),
+                  child: _buildComponentThirteen(
+                      ImageConstant.imgLineUserContactsLine,
+                      "lbl_lieu_de_sejour",
+                      "lbl_toujounin"
+                  )
+              ),
               SizedBox(height: 11.v),
-              SizedBox(
-                  height: 24.v,
-                  width: 296.h,
-                  child: Stack(alignment: Alignment.centerRight, children: [
-                    CustomImageView(
-                        imagePath: ImageConstant.imgLineCommunicat,
-                        height: 24.adaptSize,
-                        width: 24.adaptSize,
-                        alignment: Alignment.centerLeft),
-                    Align(
-                        alignment: Alignment.centerRight,
-                        child: RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: "lbl_fonction".tr,
-                                  style: theme.textTheme.bodyMedium),
-                              TextSpan(
-                                  text: "lbl_plombier".tr,
-                                  style: CustomTextStyles.bodyMediumPrimary_1)
-                            ]),
-                            textAlign: TextAlign.left)),
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(children: [
-                          CustomImageView(
-                              imagePath: ImageConstant.imgLineCommunicat,
-                              height: 24.adaptSize,
-                              width: 24.adaptSize),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 13.h, top: 3.v, bottom: 3.v),
-                              child: Text("lbl_fonction2".tr,
-                                  style: theme.textTheme.bodyMedium))
-                        ]))
-                  ])),
+              Padding(
+                  padding: EdgeInsets.only(right: 8.h),
+                  child: _buildComponentThirteen(
+                      ImageConstant.imgLineCommunicat,
+                      "lbl_fonction",
+                      "lbl_plombier"
+                  )
+              ),
               SizedBox(height: 13.v),
               Padding(
-                  padding: EdgeInsets.only(right: 44.h),
-                  child: Row(children: [
-                    CustomImageView(
-                        imagePath: ImageConstant.imgLineSystemLock2Line,
-                        height: 24.adaptSize,
-                        width: 24.adaptSize),
-                    Padding(
-                        padding:
-                            EdgeInsets.only(left: 13.h, top: 3.v, bottom: 3.v),
-                        child: RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: "lbl_lieu_de_travail".tr,
-                                  style: theme.textTheme.bodyMedium),
-                              TextSpan(
-                                  text: "lbl_tvz".tr,
-                                  style: CustomTextStyles.bodyMediumPrimary_1)
-                            ]),
-                            textAlign: TextAlign.left))
-                  ]))
+                  padding: EdgeInsets.only(right: 8.h),
+                  child: _buildComponentThirteen(
+                      ImageConstant.imgLineSystemLock2Line,
+                      "lbl_lieu_de_travail",
+                      "lbl_tvz"
+                  )
+              ),
             ]));
   }
 
@@ -334,19 +278,19 @@ class ProfileScreen extends GetWidget<ProfileController> {
   }
 
   /// Common widget
-  Widget _buildComponentThirteen() {
+  Widget _buildComponentThirteen(String? imagePath, String label, String trailing) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       CustomImageView(
-          imagePath: ImageConstant.imgLineEditorTranslate2,
+          imagePath: imagePath,
           height: 24.adaptSize,
           width: 24.adaptSize),
       Padding(
           padding: EdgeInsets.only(left: 13.h, top: 3.v, bottom: 3.v),
-          child: Text("lbl_nationalit".tr, style: theme.textTheme.bodyMedium)),
+          child: Text("$label".tr, style: theme.textTheme.bodyMedium)),
       Spacer(),
       Padding(
           padding: EdgeInsets.only(top: 4.v, bottom: 2.v),
-          child: Text("lbl_s_n_galais".tr,
+          child: Text("$trailing".tr,
               style: CustomTextStyles.bodyMediumPrimary))
     ]);
   }

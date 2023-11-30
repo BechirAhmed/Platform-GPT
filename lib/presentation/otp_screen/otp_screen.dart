@@ -489,7 +489,7 @@ class OtpScreen extends GetWidget<OtpController> {
   /// Navigates to the creationDUneDemandeOneScreen when the action is triggered.
   onTapVerifier() {
     Get.toNamed(
-      AppRoutes.creationDUneDemandeOneScreen,
+      AppRoutes.mainClassScreen,
     );
   }
 }

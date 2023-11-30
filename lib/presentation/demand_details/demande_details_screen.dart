@@ -1,4 +1,6 @@
-import 'controller/profile_one_controller.dart';
+import 'package:bgpt/core/database.dart';
+
+import 'controller/demande_details_controller.dart';
 import 'package:bgpt/core/app_export.dart';
 import 'package:bgpt/core/utils/validation_functions.dart';
 import 'package:bgpt/widgets/app_bar/appbar_leading_iconbutton.dart';
@@ -11,10 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 // ignore_for_file: must_be_immutable
-class ProfileOneScreen extends GetWidget<ProfileOneController> {
-  ProfileOneScreen({Key? key}) : super(key: key);
+class DemandDetailsScreen extends GetView<DemandDetailsController> {
+  DemandDetailsScreen({Key? key}) : super(key: key);
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Order? order = Get.arguments[0];
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +48,41 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
                                         _buildDemandeCounter(),
                                         SizedBox(height: 16.v),
                                         _buildVectorRow(),
-                                        SizedBox(height: 9.v),
-                                        _buildMobileNoEditText(),
-                                        SizedBox(height: 7.v),
+                                        SizedBox(height: 0.v),
+                                        Container(
+                                            padding: EdgeInsets.symmetric(horizontal: 8.v),
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadiusStyle.roundedBorder4),
+                                            child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      height: 16.adaptSize,
+                                                      width: 16.adaptSize,
+                                                      margin: EdgeInsets.only(
+                                                          top: 4.v, bottom: 3.v),
+                                                      padding: EdgeInsets.all(4.h),
+                                                      decoration: AppDecoration
+                                                          .fillBluegray90023
+                                                          .copyWith(
+                                                          borderRadius: BorderRadiusStyle
+                                                              .roundedBorder4),
+                                                      child: CustomImageView(
+                                                          imagePath: ImageConstant
+                                                              .imgVectorBlueGray30001,
+                                                          height: 8.adaptSize,
+                                                          width: 8.adaptSize,
+                                                          alignment: Alignment.center)),
+                                                  SizedBox(width: 10.h,),
+                                                  Text("${order?.compte_banc}",
+                                                      style: CustomTextStyles
+                                                          .labelLargeSmartPrimary)
+                                                ])),
+                                        // _buildMobileNoEditText(),
+                                        SizedBox(height: 20.v),
                                         Padding(
                                             padding: EdgeInsets.only(
-                                                left: 8.h, right: 97.h),
+                                                left: 8.h, right: 7.h),
                                             child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -63,7 +96,74 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
                                                           .bodySmallOutfitTeal900)
                                                 ])),
                                         SizedBox(height: 5.v),
-                                        _buildNouakchottOuest(),
+                                        Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 0.h, right: 0.h),
+                                            child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                      padding: EdgeInsets.symmetric(horizontal: 8.v),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius: BorderRadiusStyle.roundedBorder4),
+                                                      child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                          children: [
+                                                            Container(
+                                                                height: 16.adaptSize,
+                                                                width: 16.adaptSize,
+                                                                margin: EdgeInsets.only(
+                                                                    top: 4.v, bottom: 3.v),
+                                                                padding: EdgeInsets.all(4.h),
+                                                                decoration: AppDecoration
+                                                                    .fillBluegray90023
+                                                                    .copyWith(
+                                                                    borderRadius: BorderRadiusStyle
+                                                                        .roundedBorder4),
+                                                                child: CustomImageView(
+                                                                    imagePath: ImageConstant
+                                                                        .imgVectorBlueGray30001,
+                                                                    height: 8.adaptSize,
+                                                                    width: 8.adaptSize,
+                                                                    alignment: Alignment.center)),
+                                                            SizedBox(width: 10.h,),
+                                                            Text("${order?.wilaya}",
+                                                                style: CustomTextStyles
+                                                                    .labelLargeSmartPrimary)
+                                                          ])),
+                                                  Container(
+                                                      padding: EdgeInsets.symmetric(horizontal: 8.v),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius: BorderRadiusStyle.roundedBorder4),
+                                                      child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                          children: [
+                                                            Container(
+                                                                height: 16.adaptSize,
+                                                                width: 16.adaptSize,
+                                                                margin: EdgeInsets.only(
+                                                                    top: 4.v, bottom: 3.v),
+                                                                padding: EdgeInsets.all(4.h),
+                                                                decoration: AppDecoration
+                                                                    .fillBluegray90023
+                                                                    .copyWith(
+                                                                    borderRadius: BorderRadiusStyle
+                                                                        .roundedBorder4),
+                                                                child: CustomImageView(
+                                                                    imagePath: ImageConstant
+                                                                        .imgVectorBlueGray30001,
+                                                                    height: 8.adaptSize,
+                                                                    width: 8.adaptSize,
+                                                                    alignment: Alignment.center)),
+                                                            SizedBox(width: 10.h,),
+                                                            Text("${order?.moughataa}",
+                                                                style: CustomTextStyles
+                                                                    .labelLargeSmartPrimary)
+                                                          ])),
+                                                ])),
+                                        // _buildNouakchottOuest(),
                                         SizedBox(height: 18.v),
                                         Padding(
                                             padding: EdgeInsets.only(left: 8.h),
@@ -74,20 +174,21 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
                                         _buildWeburl()
                                       ]))))
                     ]))),
-            bottomNavigationBar: _buildBottomBar()));
+        ));
   }
 
   /// Section Widget
   PreferredSizeWidget _buildAppBar() {
     return CustomAppBar(
-        height: 48.v,
+        height: 100.v,
         leadingWidth: 59.h,
-        leading: AppbarLeadingIconbutton(
-            imagePath: ImageConstant.imgArrowLeft,
-            margin: EdgeInsets.only(left: 19.h, top: 4.v, bottom: 4.v),
-            onTap: () {
-              onTapArrowLeft();
-            }),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            onTapArrowLeft();
+          },
+
+        ),
         centerTitle: true,
         title: AppbarTitle(text: "msg_detail_de_la_demande".tr),
         actions: [
@@ -121,28 +222,9 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("lbl_demande_01".tr, style: theme.textTheme.titleLarge),
+              Text("Demande ${order?.id}", style: theme.textTheme.titleLarge),
               _buildEnAttendButton()
             ]));
-  }
-
-  /// Section Widget
-  Widget _buildVectorEditText() {
-    return Padding(
-        padding: EdgeInsets.only(left: 1.h),
-        child: CustomTextFormField(
-            width: 154.h,
-            controller: controller.vectorEditTextController,
-            hintText: "lbl_coiffeur".tr,
-            hintStyle: CustomTextStyles.labelLargeSmartPrimary,
-            prefix: Container(
-                margin: EdgeInsets.fromLTRB(16.h, 12.v, 18.h, 12.v),
-                child: CustomImageView(
-                    imagePath: ImageConstant.imgVectorBlueGray30001,
-                    height: 8.adaptSize,
-                    width: 8.adaptSize)),
-            prefixConstraints: BoxConstraints(maxHeight: 33.v),
-            borderDecoration: TextFormFieldStyleHelper.fillOnErrorContainer));
   }
 
   /// Section Widget
@@ -168,7 +250,7 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
                                   margin: EdgeInsets.only(bottom: 1.v)),
                               Padding(
                                   padding: EdgeInsets.only(left: 2.h),
-                                  child: Text("msg_23_12_30_09_2023".tr,
+                                  child: Text("${DateTime.parse(order!.created_date!).format('hh:mm dd-MM-yyyy')}",
                                       style:
                                           CustomTextStyles.labelLargeTeal900))
                             ])),
@@ -197,10 +279,13 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
                                       height: 8.adaptSize,
                                       width: 8.adaptSize,
                                       alignment: Alignment.center)),
-                              Padding(
+                              Container(
+                                width: 230.h,
                                   padding: EdgeInsets.only(left: 9.h),
-                                  child: Text("lbl_39022".tr,
-                                      style: CustomTextStyles.bodySmall12))
+                                  child: Text("${order?.reference}",
+                                      style: CustomTextStyles.bodySmall12,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))
                             ])),
                         SizedBox(height: 26.v),
                         Padding(
@@ -209,7 +294,29 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
                                 style:
                                     CustomTextStyles.bodySmallOutfitTeal900)),
                         SizedBox(height: 11.v),
-                        _buildVectorEditText(),
+                        Padding(
+                            padding: EdgeInsets.only(left: 12.h),
+                            child: Row(children: [
+                              Container(
+                                  height: 16.adaptSize,
+                                  width: 16.adaptSize,
+                                  margin: EdgeInsets.only(bottom: 1.v),
+                                  padding: EdgeInsets.all(4.h),
+                                  decoration: AppDecoration.fillBluegray90023
+                                      .copyWith(
+                                      borderRadius:
+                                      BorderRadiusStyle.roundedBorder4),
+                                  child: CustomImageView(
+                                      imagePath:
+                                      ImageConstant.imgVectorBlueGray30001,
+                                      height: 8.adaptSize,
+                                      width: 8.adaptSize,
+                                      alignment: Alignment.center)),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 9.h),
+                                  child: Text("${order?.nom_affaire}",
+                                      style: CustomTextStyles.bodySmall12))
+                            ])),
                         SizedBox(height: 19.v),
                         Padding(
                             padding: EdgeInsets.only(left: 6.h),
@@ -218,13 +325,11 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
                                     CustomTextStyles.bodySmallOutfitTeal900)),
                         SizedBox(height: 8.v),
                         Container(
-                            width: 154.h,
-                            padding: EdgeInsets.symmetric(vertical: 4.v),
+                            padding: EdgeInsets.symmetric(vertical: 4.v, horizontal: 10.h),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadiusStyle.roundedBorder4),
                             child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
                                       height: 16.adaptSize,
@@ -243,7 +348,8 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
                                           height: 8.adaptSize,
                                           width: 8.adaptSize,
                                           alignment: Alignment.center)),
-                                  Text("msg_activit_commercial".tr,
+                                  SizedBox(width: 10.h,),
+                                  Text("${order?.type_affaire}",
                                       style: CustomTextStyles
                                           .labelLargeSmartPrimary)
                                 ])),
@@ -254,7 +360,7 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
                                 style: CustomTextStyles.bodySmallOutfitTeal900))
                       ])),
               Padding(
-                  padding: EdgeInsets.only(bottom: 196.v),
+                  padding: EdgeInsets.only(bottom: 180.v),
                   child:
                       QrImageView(data: 'https://www.google.com', size: 115.v))
             ]));
@@ -266,6 +372,9 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
         padding: EdgeInsets.only(left: 7.h),
         child: CustomTextFormField(
             width: 154.h,
+            autofocus: false,
+            readOnly: true,
+            elevation: 0,
             controller: controller.mobileNoEditTextController,
             hintText: "lbl_1234567890".tr,
             hintStyle: CustomTextStyles.labelLargeSmartPrimary,
@@ -289,8 +398,28 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
   /// Section Widget
   Widget _buildNouakchottOuestButton() {
     return Expanded(
+        child: Padding(
+            padding: EdgeInsets.only(left: 1.h),
+            child: CustomTextFormField(
+                autofocus: false,
+                readOnly: true,
+                elevation: 0,
+                controller: controller.vectorEditTextController1,
+                hintText: "msg_nouakchott_ouest".tr,
+                hintStyle: CustomTextStyles.labelLargeSmartPrimary,
+                prefix: Container(
+                    margin: EdgeInsets.fromLTRB(16.h, 12.v, 17.h, 12.v),
+                    child: CustomImageView(
+                        imagePath: ImageConstant.imgVectorBlueGray30001,
+                        height: 8.adaptSize,
+                        width: 8.adaptSize)),
+                prefixConstraints: BoxConstraints(maxHeight: 33.v),
+                borderDecoration:
+                TextFormFieldStyleHelper.fillOnErrorContainer)));
+    return Expanded(
         child: CustomElevatedButton(
             height: 33.v,
+            isDisabled: true,
             text: "msg_nouakchott_ouest".tr,
             margin: EdgeInsets.only(right: 22.h),
             leftIcon: Container(
@@ -309,6 +438,9 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
         child: Padding(
             padding: EdgeInsets.only(left: 22.h),
             child: CustomTextFormField(
+                autofocus: false,
+                readOnly: true,
+                elevation: 0,
                 controller: controller.vectorEditTextController1,
                 hintText: "lbl_tevragh_zeine".tr,
                 hintStyle: CustomTextStyles.labelLargeSmartPrimary,
@@ -339,6 +471,9 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
   Widget _buildWeburlEditText() {
     return CustomTextFormField(
         width: 154.h,
+        autofocus: false,
+        readOnly: true,
+        elevation: 0,
         controller: controller.weburlEditTextController,
         hintText: "lbl_snde_pdf".tr,
         hintStyle: CustomTextStyles.labelLargeSmartBluegray300,
@@ -360,6 +495,9 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
   Widget _buildWeburlEditText1() {
     return CustomTextFormField(
         width: 154.h,
+        autofocus: false,
+        readOnly: true,
+        elevation: 0,
         controller: controller.weburlEditTextController1,
         hintText: "lbl_cnam_pdf".tr,
         hintStyle: CustomTextStyles.labelLargeSmartBluegray300,
@@ -381,6 +519,9 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
   Widget _buildWeburlEditText2() {
     return CustomTextFormField(
         width: 154.h,
+        autofocus: false,
+        readOnly: true,
+        elevation: 0,
         controller: controller.weburlEditTextController2,
         hintText: "lbl_somelec_pdf".tr,
         hintStyle: CustomTextStyles.labelLargeSmartBluegray300,
@@ -402,6 +543,9 @@ class ProfileOneScreen extends GetWidget<ProfileOneController> {
   Widget _buildWeburlEditText3() {
     return CustomTextFormField(
         width: 154.h,
+        autofocus: false,
+        readOnly: true,
+        elevation: 0,
         controller: controller.weburlEditTextController3,
         hintText: "lbl_sejour_pdf".tr,
         hintStyle: CustomTextStyles.labelLargeSmartBluegray300,

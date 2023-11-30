@@ -172,7 +172,7 @@ class PrimaryColors {
   Color get blueGray300 => Color(0XFF8A96BC);
   Color get blueGray30001 => Color(0XFF7AACBA);
   Color get blueGray30002 => Color(0XFF809FB8);
-  Color get blueGray400 => Color(0XFF76A589);
+  Color get blueGray400 => Color(0XFF169444);
   Color get blueGray40001 => Color(0XFF75A488);
   Color get blueGray500 => Color(0XFF6C768B);
   Color get blueGray5011 => Color(0X11E7EAEE);

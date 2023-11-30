@@ -6,8 +6,8 @@ import 'package:bgpt/presentation/otp_screen/otp_screen.dart';
 import 'package:bgpt/presentation/otp_screen/binding/otp_binding.dart';
 import 'package:bgpt/presentation/login_screen/login_screen.dart';
 import 'package:bgpt/presentation/login_screen/binding/login_binding.dart';
-import 'package:bgpt/presentation/creation_d_une_demande_one_screen/creation_d_une_demande_one_screen.dart';
-import 'package:bgpt/presentation/creation_d_une_demande_one_screen/binding/creation_d_une_demande_one_binding.dart';
+import 'package:bgpt/presentation/main_class/main_class_screen.dart';
+import 'package:bgpt/presentation/main_class/binding/main_class_binding.dart';
 import 'package:bgpt/presentation/splash_screen/splash_screen.dart';
 import 'package:bgpt/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:bgpt/presentation/onboarding_screen/onboarding_screen.dart';
@@ -16,8 +16,8 @@ import 'package:bgpt/presentation/creation_d_une_demande_four_screen/creation_d_
 import 'package:bgpt/presentation/creation_d_une_demande_four_screen/binding/creation_d_une_demande_four_binding.dart';
 import 'package:bgpt/presentation/demandes_screen/demandes_screen.dart';
 import 'package:bgpt/presentation/demandes_screen/binding/demandes_binding.dart';
-import 'package:bgpt/presentation/profile_one_screen/profile_one_screen.dart';
-import 'package:bgpt/presentation/profile_one_screen/binding/profile_one_binding.dart';
+import 'package:bgpt/presentation/demand_details/demande_details_screen.dart';
+import 'package:bgpt/presentation/demand_details/binding/demande_details_binding.dart';
 import 'package:bgpt/presentation/profile_screen/profile_screen.dart';
 import 'package:bgpt/presentation/profile_screen/binding/profile_binding.dart';
 import 'package:bgpt/presentation/settigns_screen/settigns_screen.dart';
@@ -35,19 +35,18 @@ class AppRoutes {
 
   static const String loginScreen = '/login_screen';
 
-  static const String creationDUneDemandeOneScreen =
+  static const String mainClassScreen =
       '/creation_d_une_demande_one_screen';
 
   static const String splashScreen = '/splash_screen';
 
   static const String onboardingScreen = '/onboarding_screen';
 
-  static const String creationDUneDemandeFourScreen =
-      '/creation_d_une_demande_four_screen';
+  static const String creationDUneDemandeFourScreen = '/creation_d_une_demande_four_screen';
 
   static const String demandesScreen = '/demandes_screen';
 
-  static const String profileOneScreen = '/profile_one_screen';
+  static const String demandDetailsScreen = '/demand_details_screen';
 
   static const String profileScreen = '/profile_screen';
 
@@ -61,6 +60,7 @@ class AppRoutes {
     GetPage(
       name: signUpScreen,
       page: () => SignUpScreen(),
+      transition: Transition.rightToLeft,
       bindings: [
         SignUpBinding(),
       ],
@@ -68,6 +68,7 @@ class AppRoutes {
     GetPage(
       name: signUpTwoScreen,
       page: () => SignUpTwoScreen(),
+      transition: Transition.rightToLeft,
       bindings: [
         SignUpTwoBinding(),
       ],
@@ -82,20 +83,22 @@ class AppRoutes {
     GetPage(
       name: loginScreen,
       page: () => LoginScreen(),
+      transition: Transition.rightToLeft,
       bindings: [
         LoginBinding(),
       ],
     ),
     GetPage(
-      name: creationDUneDemandeOneScreen,
-      page: () => CreationDUneDemandeOneScreen(),
+      name: mainClassScreen,
+      page: () => MainClassScreen(),
       bindings: [
-        CreationDUneDemandeOneBinding(),
+        MainClassBinding(),
       ],
     ),
     GetPage(
       name: splashScreen,
       page: () => SplashScreen(),
+      transition: Transition.circularReveal,
       bindings: [
         SplashBinding(),
       ],
@@ -103,6 +106,7 @@ class AppRoutes {
     GetPage(
       name: onboardingScreen,
       page: () => OnboardingScreen(),
+      transition: Transition.rightToLeft,
       bindings: [
         OnboardingBinding(),
       ],
@@ -122,10 +126,10 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: profileOneScreen,
-      page: () => ProfileOneScreen(),
+      name: demandDetailsScreen,
+      page: () => DemandDetailsScreen(),
       bindings: [
-        ProfileOneBinding(),
+        DemandDetailsBinding(),
       ],
     ),
     GetPage(

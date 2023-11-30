@@ -1,3 +1,8 @@
+import 'package:bgpt/presentation/demandes_screen/demandes_screen.dart';
+import 'package:bgpt/presentation/main_class/main_class_screen.dart';
+import 'package:drift_db_viewer/drift_db_viewer.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
 import '../creation_d_une_demande_four_screen/widgets/creationdemandefour_item_widget.dart';
 import 'controller/creation_d_une_demande_four_controller.dart';
 import 'models/creationdemandefour_item_model.dart';
@@ -12,9 +17,8 @@ import 'package:bgpt/widgets/custom_elevated_button.dart';
 import 'package:bgpt/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-// ignore_for_file: must_be_immutable
-class CreationDUneDemandeFourScreen
-    extends GetWidget<CreationDUneDemandeFourController> {
+
+class CreationDUneDemandeFourScreen extends GetView<CreationDUneDemandeFourController> {
   const CreationDUneDemandeFourScreen({Key? key})
       : super(
           key: key,
@@ -27,289 +31,211 @@ class CreationDUneDemandeFourScreen
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: _buildAppBar(),
-        body: Container(
-          width: 394.h,
-          padding: EdgeInsets.symmetric(vertical: 1.v),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 54.v),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 22.h,
-                      right: 14.h,
-                      bottom: 5.v,
-                    ),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "msg_cr_ation_d_une_demande".tr,
-                            style: CustomTextStyles.titleSmallBlack900,
-                          ),
+        // appBar: _buildAppBar(),
+        body: GetBuilder<CreationDUneDemandeFourController>(
+          builder: (ctx) {
+            return Container(
+              width: mediaQueryData.size.width,
+              padding: EdgeInsets.symmetric(vertical: 1.v),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 54.v),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 22.h,
+                          right: 22.h,
+                          bottom: 5.v,
                         ),
-                        SizedBox(height: 28.v),
-                        _buildCreationDemandeEditText(),
-                        SizedBox(height: 10.v),
-                        _buildCreationDemandeFour(),
-                        SizedBox(height: 30.v),
-                        CustomElevatedButton(
-                          height: 50.v,
-                          text: "lbl_soumettre".tr,
-                          margin: EdgeInsets.only(
-                            left: 10.h,
-                            right: 18.h,
-                          ),
-                          buttonStyle: CustomButtonStyles.fillPrimaryTL25,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: _buildBottomBar(),
-      ),
-    );
-  }
-
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar() {
-    return CustomAppBar(
-      leadingWidth: 67.h,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgVector49x49,
-        margin: EdgeInsets.only(
-          left: 18.h,
-          top: 2.v,
-          bottom: 4.v,
-        ),
-      ),
-      title: Padding(
-        padding: EdgeInsets.only(left: 16.h),
-        child: Column(
-          children: [
-            AppbarSubtitle(
-              text: "lbl_bienvenu".tr,
-              margin: EdgeInsets.only(right: 27.h),
-            ),
-            SizedBox(height: 3.v),
-            AppbarSubtitleOne(
-              text: "msg_monday_3_october".tr,
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        AppbarTrailingImage(
-          imagePath: ImageConstant.imgNotification,
-          margin: EdgeInsets.fromLTRB(32.h, 15.v, 32.h, 20.v),
-        ),
-      ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildCreationDemandeEditText() {
-    return SizedBox(
-      height: 319.v,
-      width: 344.h,
-      child: Stack(
-        alignment: Alignment.bottomLeft,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 102.v),
-            child: CustomDropDown(
-              width: 344.h,
-              icon: Container(
-                margin: EdgeInsets.fromLTRB(30.h, 9.v, 13.h, 9.v),
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgArrowdownBlueGray30002,
-                  height: 24.adaptSize,
-                  width: 24.adaptSize,
-                ),
-              ),
-              alignment: Alignment.topCenter,
-              items: controller.creationDUneDemandeFourModelObj.value
-                  .dropdownItemList!.value,
-              onChanged: (value) {
-                controller.onSelected(value);
-              },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 1.h,
-              bottom: 94.v,
-            ),
-            child: CustomTextFormField(
-              width: 144.h,
-              controller: controller.editTextController,
-              textInputAction: TextInputAction.done,
-              alignment: Alignment.bottomLeft,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 94.v),
-            child: CustomDropDown(
-              width: 144.h,
-              icon: Container(
-                margin: EdgeInsets.fromLTRB(30.h, 9.v, 13.h, 9.v),
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgArrowdownBlueGray30002,
-                  height: 24.adaptSize,
-                  width: 24.adaptSize,
-                ),
-              ),
-              alignment: Alignment.bottomRight,
-              items: controller.creationDUneDemandeFourModelObj.value
-                  .dropdownItemList1!.value,
-              onChanged: (value) {
-                controller.onSelected1(value);
-              },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 25.v),
-            child: CustomDropDown(
-              width: 144.h,
-              icon: Container(
-                margin: EdgeInsets.fromLTRB(30.h, 9.v, 5.h, 9.v),
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgArrowdownBlueGray30002,
-                  height: 24.adaptSize,
-                  width: 24.adaptSize,
-                ),
-              ),
-              alignment: Alignment.bottomLeft,
-              items: controller.creationDUneDemandeFourModelObj.value
-                  .dropdownItemList2!.value,
-              onChanged: (value) {
-                controller.onSelected2(value);
-              },
-            ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "lbl_nom_d_affaire".tr,
-                  style: theme.textTheme.bodySmall,
-                ),
-                SizedBox(height: 9.v),
-                CustomDropDown(
-                  icon: Container(
-                    margin: EdgeInsets.fromLTRB(30.h, 9.v, 13.h, 9.v),
-                    child: CustomImageView(
-                      imagePath: ImageConstant.imgArrowdownBlueGray30002,
-                      height: 24.adaptSize,
-                      width: 24.adaptSize,
-                    ),
-                  ),
-                  hintText: "lbl_coiffeur".tr,
-                  items: controller.creationDUneDemandeFourModelObj.value
-                      .dropdownItemList3!.value,
-                  contentPadding: EdgeInsets.only(
-                    left: 12.h,
-                    top: 13.v,
-                    bottom: 13.v,
-                  ),
-                  onChanged: (value) {
-                    controller.onSelected3(value);
-                  },
-                ),
-                SizedBox(height: 10.v),
-                Padding(
-                  padding: EdgeInsets.only(left: 1.h),
-                  child: Text(
-                    "lbl_type_d_affaire".tr,
-                    style: theme.textTheme.bodySmall,
-                  ),
-                ),
-                SizedBox(height: 21.v),
-                Padding(
-                  padding: EdgeInsets.only(left: 12.h),
-                  child: Text(
-                    "msg_travailleur_ind_pendant".tr,
-                    style: CustomTextStyles.labelMediumLightblue900,
-                  ),
-                ),
-                SizedBox(height: 22.v),
-                Padding(
-                  padding: EdgeInsets.only(left: 1.h),
-                  child: Row(
-                    children: [
-                      Text(
-                        "lbl_compte_bancaire".tr,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 88.h),
-                        child: Text(
-                          "lbl_wilaya".tr,
-                          style: theme.textTheme.bodySmall,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "msg_cr_ation_d_une_demande".tr,
+                                style: CustomTextStyles.titleSmallBlack900,
+                              ),
+                            ),
+                            SizedBox(height: 28.v),
+                            // _buildCreationDemandeEditText(),
+                            Text(
+                              "lbl_nom_d_affaire".tr,
+                              style: theme.textTheme.bodySmall,
+                            ),
+                            SizedBox(height: 9.v),
+                            CustomDropDown(
+                              icon: Container(
+                                margin: EdgeInsets.fromLTRB(30.h, 1.v, 13.h, 1.v),
+                                child: CustomImageView(
+                                  imagePath: ImageConstant.imgArrowdown,
+                                  height: 34.adaptSize,
+                                  width: 34.adaptSize,
+                                ),
+                              ),
+                              hintText: "lbl_nom_d_affaire".tr,
+                              items: controller.creationDUneDemandeFourModelObj.value
+                                  .dropdownItemList1!.value,
+                              contentPadding: EdgeInsets.only(
+                                left: 12.h,
+                                top: 13.v,
+                                bottom: 13.v,
+                              ),
+                              onChanged: (value) {
+                                controller.onSelected1(value);
+                              },
+                            ),
+                            SizedBox(height: 15.v),
+                            Text(
+                              "lbl_type_d_affaire".tr,
+                              style: theme.textTheme.bodySmall,
+                            ),
+                            SizedBox(height: 9.v),
+                            CustomDropDown(
+                              icon: Container(
+                                margin: EdgeInsets.fromLTRB(30.h, 1.v, 13.h, 1.v),
+                                child: CustomImageView(
+                                  imagePath: ImageConstant.imgArrowdown,
+                                  height: 34.adaptSize,
+                                  width: 34.adaptSize,
+                                ),
+                              ),
+                              hintText: "lbl_type_d_affaire".tr,
+                              items: controller.creationDUneDemandeFourModelObj.value
+                                  .dropdownItemList2!.value,
+                              contentPadding: EdgeInsets.only(
+                                left: 12.h,
+                                top: 13.v,
+                                bottom: 13.v,
+                              ),
+                              onChanged: (value) {
+                                controller.onSelected2(value);
+                              },
+                            ),
+                            SizedBox(height: 15.v),
+                            Text(
+                              "lbl_compte_bancaire".tr,
+                              style: theme.textTheme.bodySmall,
+                            ),
+                            SizedBox(height: 9.v),
+                            CustomTextFormField(
+                              controller: controller.editTextController,
+                              hintText: "lbl_compte_bancaire".tr,
+                              autofocus: false,
+                              prefixConstraints: BoxConstraints(
+                                maxHeight: 50.v,
+                              ),
+                              contentPadding: EdgeInsets.only(
+                                top: 15.v,
+                                right: 30.h,
+                                bottom: 15.v,
+                                left: 13.v,
+                              ),
+                              borderDecoration: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.h),
+                                borderSide: BorderSide(width: 1.0, color: appTheme.blueGray400),
+                              ),
+                              elevation: 3,
+                            ),
+                            SizedBox(height: 15.v,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "lbl_wilaya".tr,
+                                      style: theme.textTheme.bodySmall,
+                                    ),
+                                    SizedBox(height: 9.v),
+                                    CustomDropDown(
+                                      width: mediaQueryData.size.width / 2.3,
+                                      icon: Container(
+                                        margin: EdgeInsets.fromLTRB(0.h, 1.v, 10.h, 0.v),
+                                        child: CustomImageView(
+                                          imagePath: ImageConstant.imgArrowdown,
+                                          height: 34.adaptSize,
+                                          width: 34.adaptSize,
+                                        ),
+                                      ),
+                                      hintText: "lbl_wilaya".tr,
+                                      items: controller.creationDUneDemandeFourModelObj.value
+                                          .dropdownItemList3!.value,
+                                      contentPadding: EdgeInsets.only(
+                                        left: 12.h,
+                                        top: 13.v,
+                                        bottom: 13.v,
+                                      ),
+                                      onChanged: (value) {
+                                        controller.onSelected3(value);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "lbl_moughataa".tr,
+                                      style: theme.textTheme.bodySmall,
+                                    ),
+                                    SizedBox(height: 9.v),
+                                    CustomDropDown(
+                                      width: mediaQueryData.size.width / 2.3,
+                                      icon: Container(
+                                        margin: EdgeInsets.fromLTRB(0.h, 1.v, 10.h, 0.v),
+                                        child: CustomImageView(
+                                          imagePath: ImageConstant.imgArrowdown,
+                                          height: 34.adaptSize,
+                                          width: 34.adaptSize,
+                                        ),
+                                      ),
+                                      hintText: "lbl_moughataa".tr,
+                                      items: controller.creationDUneDemandeFourModelObj.value
+                                          .dropdownItemList4!.value,
+                                      contentPadding: EdgeInsets.only(
+                                        left: 12.h,
+                                        top: 13.v,
+                                        bottom: 13.v,
+                                      ),
+                                      onChanged: (value) {
+                                        controller.onSelected4(value);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 28.v),
+                            _buildCreationDemandeFour(),
+                            SizedBox(height: 30.v),
+                            CustomElevatedButton(
+                              height: 50.v,
+                              isLoading: controller.isSubmitting,
+                              text: "lbl_soumettre".tr,
+                              margin: EdgeInsets.only(
+                                left: 10.h,
+                                right: 18.h,
+                              ),
+                              buttonStyle: CustomButtonStyles.fillPrimaryTL25,
+                              onPressed: () {
+                                onSubmit(context);
+                              },
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 27.v),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: 12.h,
-                    right: 78.h,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "msg_saisir_le_num_de".tr,
-                        style: CustomTextStyles.poppinsBlack900,
-                      ),
-                      Text(
-                        "msg_choisir_le_wilaya".tr,
-                        style: CustomTextStyles.poppinsBlack900,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 22.v),
-                Padding(
-                  padding: EdgeInsets.only(left: 1.h),
-                  child: Text(
-                    "lbl_moughataa".tr,
-                    style: theme.textTheme.bodySmall,
-                  ),
-                ),
-                SizedBox(height: 20.v),
-                Padding(
-                  padding: EdgeInsets.only(left: 11.h),
-                  child: Text(
-                    "msg_choisir_moughataa".tr,
-                    style: CustomTextStyles.poppinsBlack900,
-                  ),
-                ),
-                SizedBox(height: 24.v),
-                Padding(
-                  padding: EdgeInsets.only(left: 1.h),
-                  child: Text(
-                    "msg_importation_des".tr,
-                    style: theme.textTheme.bodySmall,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+                ],
+              ),
+            );
+          }
+        ),
       ),
     );
   }
@@ -345,83 +271,102 @@ class CreationDUneDemandeFourScreen
     );
   }
 
-  /// Section Widget
-  Widget _buildBottomBar() {
-    return Container(
-      margin: EdgeInsets.only(left: 6.h),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: 108.h,
-            child: Divider(),
-          ),
-          Container(
-            padding: EdgeInsets.all(16.h),
-            decoration: AppDecoration.outlineBlack900.copyWith(
-              borderRadius: BorderRadiusStyle.customBorderBL42,
+  void onSubmit(BuildContext context) async {
+    int response = await controller.storeDemande();
+    if(response != 0) {
+      controller.editTextController.clear();
+      
+      showDialog(context: context, builder: (BuildContext ctx) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+              borderRadius:BorderRadius.circular(30.0)),
+          child: Container(
+            height: MediaQuery.sizeOf(context).height - 300,
+            width: MediaQuery.sizeOf(context).width,
+            padding: EdgeInsets.symmetric(
+              vertical: 40.v,
+              horizontal: 20.h
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CustomImageView(
-                  imagePath: ImageConstant.imgGroup1000004634,
-                  height: 25.v,
-                  width: 341.h,
-                ),
-                SizedBox(height: 6.v),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "lbl_profile".tr,
-                        style: theme.textTheme.labelMedium,
-                      ),
-                      TextSpan(
-                        text: "lbl_param_tres".tr,
-                        style: theme.textTheme.labelMedium,
-                      ),
-                      TextSpan(
-                        text: "         ".tr,
-                      ),
-                      TextSpan(
-                        text: "     ".tr,
-                      ),
-                      TextSpan(
-                        text: "lbl_nouveau".tr,
-                        style: CustomTextStyles.labelMediumPrimary,
-                      ),
-                      TextSpan(
-                        text: " ",
-                      ),
-                      TextSpan(
-                        text: " ",
-                      ),
-                      TextSpan(
-                        text: "            ".tr,
-                      ),
-                      TextSpan(
-                        text: "lbl_demandes".tr,
-                        style: theme.textTheme.labelMedium,
-                      ),
-                      TextSpan(
-                        text: "          ".tr,
-                      ),
-                      TextSpan(
-                        text: "lbl_aide".tr,
-                        style: theme.textTheme.labelMedium,
-                      ),
-                    ],
+                  imagePath: ImageConstant.imgDialog,
+                  fit: BoxFit.contain,
+                  radius: BorderRadius.circular(
+                    15.h,
                   ),
-                  textAlign: TextAlign.left,
                 ),
-                SizedBox(height: 2.v),
+                SizedBox(height: 40.v,),
+                Text(
+                  "Félicitations!",
+                  style:TextStyle(
+                    fontSize: 30,
+                    color: appTheme.blueGray400,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                SizedBox(height: 40.v,),
+                Center(
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Votre Demande est soumise avec Success. Votre numéro de dossier est ",
+                          style:TextStyle(
+                            fontSize: 15,
+                            color: Colors.black
+                          ),
+                        ),
+                        TextSpan(
+                          text: "$response",
+                          style:TextStyle(
+                            fontSize: 15,
+                            color: appTheme.blueGray400,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ]
+                    ),
+                  )
+                ),
+                Spacer(),
+                CustomElevatedButton(
+                  height: 50.v,
+                  text: "Retour a la page d’accueil",
+                  margin: EdgeInsets.only(
+                    left: 10.h,
+                    right: 18.h,
+                  ),
+                  buttonStyle: CustomButtonStyles.fillPrimaryTL25,
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                    controller.tabController.jumpToTab(0);
+                    controller.demandesController.fetchOrders();
+                  },
+                ),
               ],
             ),
           ),
-        ],
-      ),
-    );
+        );
+      });
+      
+      // Get.snackbar("Success ", "Demande created successfully",
+      //     snackPosition: SnackPosition.TOP,
+      //     colorText: Colors.white,
+      //     backgroundColor: appTheme.blueGray400
+      // );
+      // Navigator.popAndPushNamed(context, AppRoutes.mainClassScreen);
+      // Get.toNamed(
+      //     AppRoutes.demandesScreen
+      // );
+    }else{
+      Get.snackbar("Error! ", "Something went wrong.",
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: appTheme.redA700
+      );
+    }
   }
 }

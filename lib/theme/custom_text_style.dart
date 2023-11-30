@@ -12,6 +12,7 @@ class CustomTextStyles {
       );
   static get bodyLargeBlack900_1 => theme.textTheme.bodyLarge!.copyWith(
         color: appTheme.black900,
+        fontSize: 13.fSize
       );
   static get bodyLargeBlack900_2 => theme.textTheme.bodyLarge!.copyWith(
         color: appTheme.black900.withOpacity(0.88),
@@ -78,7 +79,7 @@ class CustomTextStyles {
       );
   static get bodySmallYellow800 => theme.textTheme.bodySmall!.copyWith(
         color: appTheme.yellow800,
-        fontSize: 10.fSize,
+        fontSize: 12.fSize,
       );
   // Headline text style
   static get headlineSmallAlmarai =>

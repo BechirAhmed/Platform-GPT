@@ -13,6 +13,7 @@ class BaseButton extends StatelessWidget {
     this.width,
     this.margin,
     this.alignment,
+    required this.isLoading,
   }) : super(
           key: key,
         );
@@ -26,6 +27,8 @@ class BaseButton extends StatelessWidget {
   final TextStyle? buttonTextStyle;
 
   final bool? isDisabled;
+
+  final bool isLoading;
 
   final double? height;
 

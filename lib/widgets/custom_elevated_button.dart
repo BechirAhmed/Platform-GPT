@@ -14,6 +14,7 @@ class CustomElevatedButton extends BaseButton {
     Alignment? alignment,
     TextStyle? buttonTextStyle,
     bool? isDisabled,
+    bool isLoading = false,
     double? height,
     double? width,
     required String text,
@@ -22,6 +23,7 @@ class CustomElevatedButton extends BaseButton {
           onPressed: onPressed,
           buttonStyle: buttonStyle,
           isDisabled: isDisabled,
+          isLoading: isLoading,
           buttonTextStyle: buttonTextStyle,
           height: height,
           width: width,
@@ -57,12 +59,23 @@ class CustomElevatedButton extends BaseButton {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              leftIcon ?? const SizedBox.shrink(),
-              Text(
-                text,
-                style: buttonTextStyle ?? theme.textTheme.titleSmall,
-              ),
-              rightIcon ?? const SizedBox.shrink(),
+              if(!isLoading)...[
+                leftIcon ?? const SizedBox.shrink(),
+                Text(
+                  text,
+                  style: buttonTextStyle ?? theme.textTheme.titleSmall,
+                ),
+                rightIcon ?? const SizedBox.shrink(),
+              ]else...[
+                SizedBox(
+                  width: 25,
+                  height: 25,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 3,
+                  ),
+                )
+              ]
             ],
           ),
         ),

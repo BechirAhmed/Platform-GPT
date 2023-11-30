@@ -77,31 +77,36 @@ class CustomDropDown extends StatelessWidget {
 
   Widget get dropDownWidget => SizedBox(
         width: width ?? double.maxFinite,
-        child: DropdownButtonFormField<SelectionPopupModel>(
-          focusNode: focusNode ?? FocusNode(),
-          icon: icon,
-          autofocus: autofocus!,
-          style: textStyle ?? CustomTextStyles.labelMediumLightblue900Bold,
-          items: items?.map((SelectionPopupModel item) {
-            return DropdownMenuItem<SelectionPopupModel>(
-              value: item,
-              child: Text(
-                item.title,
-                overflow: TextOverflow.ellipsis,
-                style: hintStyle ?? CustomTextStyles.bodySmallBlack900Light,
-              ),
-            );
-          }).toList(),
-          decoration: decoration,
-          validator: validator,
-          onChanged: (value) {
-            onChanged!(value!);
-          },
+        child: Material(
+          elevation: 4,
+          borderRadius: BorderRadius.circular(25.h),
+          shadowColor: theme.colorScheme.onErrorContainer.withOpacity(1),
+          child: DropdownButtonFormField<SelectionPopupModel>(
+            focusNode: focusNode ?? FocusNode(),
+            icon: icon,
+            autofocus: autofocus!,
+            style: textStyle ?? CustomTextStyles.labelMediumLightblue900Bold,
+            items: items?.map((SelectionPopupModel item) {
+              return DropdownMenuItem<SelectionPopupModel>(
+                value: item,
+                child: Text(
+                  item.title,
+                  overflow: TextOverflow.ellipsis,
+                  style: textStyle ?? CustomTextStyles.bodyLargeBlack900_1,
+                ),
+              );
+            }).toList(),
+            decoration: decoration,
+            validator: validator,
+            onChanged: (value) {
+              onChanged!(value!);
+            },
+          ),
         ),
       );
   InputDecoration get decoration => InputDecoration(
         hintText: hintText ?? "",
-        hintStyle: hintStyle ?? CustomTextStyles.bodySmallBlack900Light,
+        hintStyle: hintStyle ?? CustomTextStyles.bodySmallBlack900,
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,

@@ -6,6 +6,7 @@ class CustomTextFormField extends StatelessWidget {
     Key? key,
     this.alignment,
     this.width,
+    this.elevation,
     this.controller,
     this.focusNode,
     this.autofocus = true,
@@ -24,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.borderDecoration,
     this.fillColor,
     this.filled = true,
+    this.readOnly = false,
     this.validator,
   }) : super(
           key: key,
@@ -32,6 +34,8 @@ class CustomTextFormField extends StatelessWidget {
   final Alignment? alignment;
 
   final double? width;
+
+  final double? elevation;
 
   final TextEditingController? controller;
 
@@ -69,6 +73,8 @@ class CustomTextFormField extends StatelessWidget {
 
   final bool? filled;
 
+  final bool readOnly;
+
   final FormFieldValidator<String>? validator;
 
   @override
@@ -83,17 +89,22 @@ class CustomTextFormField extends StatelessWidget {
 
   Widget get textFormFieldWidget => SizedBox(
         width: width ?? double.maxFinite,
-        child: TextFormField(
-          controller: controller,
-          focusNode: focusNode ?? FocusNode(),
-          autofocus: autofocus!,
-          style: textStyle ?? CustomTextStyles.bodySmallBlack90010,
-          obscureText: obscureText!,
-          textInputAction: textInputAction,
-          keyboardType: textInputType,
-          maxLines: maxLines ?? 1,
-          decoration: decoration,
-          validator: validator,
+        child: Material(
+          elevation: elevation ?? 4,
+          borderRadius: BorderRadius.circular(25.h),
+          child: TextFormField(
+            controller: controller,
+            focusNode: focusNode ?? FocusNode(),
+            autofocus: autofocus!,
+            style: textStyle ?? CustomTextStyles.bodyLargeBlack900_2,
+            obscureText: obscureText!,
+            textInputAction: textInputAction,
+            keyboardType: textInputType,
+            maxLines: maxLines ?? 1,
+            decoration: decoration,
+            validator: validator,
+            readOnly: readOnly,
+          ),
         ),
       );
   InputDecoration get decoration => InputDecoration(
@@ -126,7 +137,7 @@ class CustomTextFormField extends StatelessWidget {
             ),
         focusedBorder: borderDecoration ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.h),
+              borderRadius: BorderRadius.circular(25.h),
               borderSide: BorderSide(
                 color: appTheme.blueGray30002,
                 width: 1,

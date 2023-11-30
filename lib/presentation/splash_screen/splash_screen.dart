@@ -8,44 +8,23 @@ class SplashScreen extends GetWidget<SplashController> {
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
-    return SafeArea(
-        child: Scaffold(
-            body: SizedBox(
-                width: 395.h,
-                child: SingleChildScrollView(
-                    child: Card(
-                        clipBehavior: Clip.antiAlias,
-                        elevation: 0,
-                        margin: EdgeInsets.all(0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadiusStyle.roundedBorder42),
-                        child: Container(
-                            height: 855.v,
-                            width: 395.h,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadiusStyle.roundedBorder42),
-                            child:
-                                Stack(alignment: Alignment.center, children: [
-                              CustomImageView(
-                                  imagePath: ImageConstant.imgBg,
-                                  height: 853.v,
-                                  width: 394.h,
-                                  alignment: Alignment.center),
-                              Align(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 34.h, vertical: 298.v),
-                                      decoration: AppDecoration.fillBluegray400
-                                          .copyWith(
-                                              borderRadius: BorderRadiusStyle
-                                                  .roundedBorder42),
-                                      child: CustomImageView(
-                                          imagePath:
-                                              ImageConstant.imgPortraitYoung,
-                                          height: 257.v,
-                                          width: 325.h)))
-                            ])))))));
+    return Scaffold(
+      backgroundColor: appTheme.blueGray400,
+        body: Container(
+            height: mediaQueryData.size.height,
+            width: mediaQueryData.size.width,
+            child:
+                Stack(alignment: Alignment.center, children: [
+              Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 64.h, vertical: 298.v),
+                      child: CustomImageView(
+                          imagePath:
+                              ImageConstant.imgPortraitYoung,
+                          height: 257.v,
+                          width: 325.h)))
+            ])));
   }
 }

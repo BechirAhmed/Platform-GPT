@@ -1,4 +1,4 @@
-import '../controller/creation_d_une_demande_one_controller.dart';
+import '../controller/main_class_controller.dart';
 import '../models/creationdemandeone_item_model.dart';
 import 'package:bgpt/core/app_export.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class CreationdemandeoneItemWidget extends StatelessWidget {
 
   CreationdemandeoneItemModel creationdemandeoneItemModelObj;
 
-  var controller = Get.find<CreationDUneDemandeOneController>();
+  var controller = Get.find<MainClassController>();
 
   @override
   Widget build(BuildContext context) {

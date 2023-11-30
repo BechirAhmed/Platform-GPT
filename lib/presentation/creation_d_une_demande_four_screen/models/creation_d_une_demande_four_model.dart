@@ -24,48 +24,72 @@ class CreationDUneDemandeFourModel {
   Rx<List<SelectionPopupModel>> dropdownItemList1 = Rx([
     SelectionPopupModel(
       id: 1,
-      title: "Item One",
+      title: "Plombier",
       isSelected: true,
     ),
     SelectionPopupModel(
       id: 2,
-      title: "Item Two",
+      title: "Coiffeur",
     ),
     SelectionPopupModel(
       id: 3,
-      title: "Item Three",
+      title: "Chauffeur",
+    ),
+    SelectionPopupModel(
+      id: 3,
+      title: "Boucher",
     )
   ]);
 
   Rx<List<SelectionPopupModel>> dropdownItemList2 = Rx([
     SelectionPopupModel(
       id: 1,
-      title: "Item One",
+      title: "Travailleur",
       isSelected: true,
     ),
     SelectionPopupModel(
       id: 2,
-      title: "Item Two",
+      title: "Travailleur independant",
     ),
     SelectionPopupModel(
       id: 3,
-      title: "Item Three",
+      title: "Salarier",
+    ),
+    SelectionPopupModel(
+      id: 3,
+      title: "Entrepreneur",
     )
   ]);
 
   Rx<List<SelectionPopupModel>> dropdownItemList3 = Rx([
     SelectionPopupModel(
       id: 1,
-      title: "Item One",
+      title: "Nouakchott-sud",
       isSelected: true,
     ),
     SelectionPopupModel(
       id: 2,
-      title: "Item Two",
+      title: "Nouakchott-ouest",
     ),
     SelectionPopupModel(
       id: 3,
-      title: "Item Three",
+      title: "Nouakchott-nord",
+    )
+  ]);
+
+  Rx<List<SelectionPopupModel>> dropdownItemList4 = Rx([
+    SelectionPopupModel(
+      id: 1,
+      title: "Dar-Naim",
+      isSelected: true,
+    ),
+    SelectionPopupModel(
+      id: 2,
+      title: "Toujounine",
+    ),
+    SelectionPopupModel(
+      id: 3,
+      title: "Tevragh Zeina",
     )
   ]);
 

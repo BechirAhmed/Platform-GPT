@@ -4,7 +4,7 @@ import 'creationdemandeone_item_model.dart';
 
 /// This class defines the variables used in the [creation_d_une_demande_one_screen],
 /// and is typically used to hold data that is passed between different parts of the application.
-class CreationDUneDemandeOneModel {
+class MainClassModel {
   Rx<List<SelectionPopupModel>> dropdownItemList = Rx([
     SelectionPopupModel(
       id: 1,

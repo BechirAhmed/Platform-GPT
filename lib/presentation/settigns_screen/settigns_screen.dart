@@ -1,3 +1,6 @@
+import 'package:drift_db_viewer/drift_db_viewer.dart';
+import 'package:get_storage/get_storage.dart';
+
 import 'controller/settigns_controller.dart';
 import 'package:bgpt/core/app_export.dart';
 import 'package:bgpt/widgets/app_bar/appbar_leading_iconbutton.dart';
@@ -15,7 +18,7 @@ class SettignsScreen extends GetWidget<SettignsController> {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
-            appBar: _buildAppBar(),
+            // appBar: _buildAppBar(),
             body: SizedBox(
                 width: 395.h,
                 child: Column(
@@ -31,7 +34,7 @@ class SettignsScreen extends GetWidget<SettignsController> {
                                       borderRadius:
                                           BorderRadiusStyle.roundedBorder42),
                                   child: Column(children: [
-                                    _buildMonCompte(),
+                                    _buildMonCompte(context),
                                     SizedBox(height: 54.v),
                                     Align(
                                         alignment: Alignment.centerLeft,
@@ -47,7 +50,7 @@ class SettignsScreen extends GetWidget<SettignsController> {
                                     _buildNotification1()
                                   ]))))
                     ])),
-            bottomNavigationBar: _buildBottomBar()));
+        ));
   }
 
   /// Section Widget
@@ -69,7 +72,8 @@ class SettignsScreen extends GetWidget<SettignsController> {
   }
 
   /// Section Widget
-  Widget _buildMonCompte() {
+  Widget _buildMonCompte(BuildContext context) {
+    final box = GetStorage();
     return Container(
         margin: EdgeInsets.only(right: 5.h),
         padding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 24.v),
@@ -80,52 +84,61 @@ class SettignsScreen extends GetWidget<SettignsController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                SizedBox(
-                    height: 40.v,
-                    width: 276.h,
-                    child: Stack(alignment: Alignment.center, children: [
-                      CustomImageView(
-                          imagePath: ImageConstant.imgGroup12135,
-                          height: 14.adaptSize,
-                          width: 14.adaptSize,
-                          alignment: Alignment.centerRight,
-                          margin: EdgeInsets.only(right: 5.h)),
-                      Align(
-                          alignment: Alignment.center,
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomIconButton(
-                                    height: 40.adaptSize,
-                                    width: 40.adaptSize,
-                                    padding: EdgeInsets.all(10.h),
-                                    child: CustomImageView(
-                                        imagePath:
-                                            ImageConstant.imgGroup12334)),
-                                Expanded(
-                                    child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 15.h, top: 2.v),
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 1.h),
-                                                  child: Text(
-                                                      "lbl_mon_compte".tr,
-                                                      style: CustomTextStyles
-                                                          .labelLargeDMSansGray900)),
-                                              SizedBox(height: 5.v),
-                                              Text(
-                                                  "msg_apporter_des_modifications"
-                                                      .tr,
-                                                  style: CustomTextStyles
-                                                      .bodySmallDMSansGray50001)
-                                            ])))
-                              ]))
-                    ])),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DriftDbViewer(controller.database)));
+                  },
+                  child: SizedBox(
+                      height: 40.v,
+                      width: 276.h,
+                      child: Stack(alignment: Alignment.center, children: [
+                        CustomImageView(
+                            imagePath: ImageConstant.imgGroup12135,
+                            height: 14.adaptSize,
+                            width: 14.adaptSize,
+                            alignment: Alignment.centerRight,
+                            margin: EdgeInsets.only(right: 5.h)),
+                        Align(
+                            alignment: Alignment.center,
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomIconButton(
+                                      height: 40.adaptSize,
+                                      width: 40.adaptSize,
+                                      decoration: BoxDecoration(
+                                        color: theme.colorScheme.primary.withOpacity(.1),
+                                        borderRadius: BorderRadius.circular(20.h),
+                                      ),
+                                      padding: EdgeInsets.all(10.h),
+                                      child: CustomImageView(
+                                          imagePath:
+                                              ImageConstant.imgGroup12334)),
+                                  Expanded(
+                                      child: Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 15.h, top: 2.v),
+                                          child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 1.h),
+                                                    child: Text(
+                                                        "lbl_mon_compte".tr,
+                                                        style: CustomTextStyles
+                                                            .labelLargeDMSansGray900)),
+                                                SizedBox(height: 5.v),
+                                                Text(
+                                                    "msg_apporter_des_modifications"
+                                                        .tr,
+                                                    style: CustomTextStyles
+                                                        .bodySmallDMSansGray50001)
+                                              ])))
+                                ]))
+                      ])),
+                ),
                 CustomImageView(
                     imagePath: ImageConstant.imgIconLightMonth,
                     height: 11.v,
@@ -134,10 +147,14 @@ class SettignsScreen extends GetWidget<SettignsController> {
                         EdgeInsets.only(left: 28.h, top: 14.v, bottom: 14.v))
               ]),
               SizedBox(height: 25.v),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 CustomIconButton(
                     height: 40.adaptSize,
                     width: 40.adaptSize,
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.primary.withOpacity(.1),
+                      borderRadius: BorderRadius.circular(20.h),
+                    ),
                     padding: EdgeInsets.all(10.h),
                     child: CustomImageView(
                         imagePath: ImageConstant.imgGroup12334)),
@@ -160,10 +177,14 @@ class SettignsScreen extends GetWidget<SettignsController> {
                     margin: EdgeInsets.symmetric(vertical: 14.v))
               ]),
               SizedBox(height: 25.v),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 CustomIconButton(
                     height: 40.adaptSize,
                     width: 40.adaptSize,
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.primary.withOpacity(.1),
+                      borderRadius: BorderRadius.circular(20.h),
+                    ),
                     padding: EdgeInsets.all(10.h),
                     child: CustomImageView(
                         imagePath: ImageConstant.imgGroup12334Primary)),
@@ -186,10 +207,14 @@ class SettignsScreen extends GetWidget<SettignsController> {
                     }))
               ]),
               SizedBox(height: 25.v),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 CustomIconButton(
                     height: 40.adaptSize,
                     width: 40.adaptSize,
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.primary.withOpacity(.1),
+                      borderRadius: BorderRadius.circular(20.h),
+                    ),
                     padding: EdgeInsets.all(10.h),
                     child: CustomImageView(
                         imagePath: ImageConstant.imgGroup12334Primary40x40)),
@@ -217,20 +242,32 @@ class SettignsScreen extends GetWidget<SettignsController> {
               SizedBox(height: 25.v),
               Align(
                   alignment: Alignment.centerLeft,
-                  child: Row(children: [
-                    CustomIconButton(
-                        height: 40.adaptSize,
-                        width: 40.adaptSize,
-                        padding: EdgeInsets.all(10.h),
-                        decoration: IconButtonStyleHelper.fillGray,
-                        child: CustomImageView(
-                            imagePath: ImageConstant.imgIconlyTwoToneLogout)),
-                    Padding(
-                        padding: EdgeInsets.only(
-                            left: 16.h, top: 12.v, bottom: 10.v),
-                        child: Text("lbl_log_out".tr,
-                            style: CustomTextStyles.labelLargeDMSansGray700))
-                  ]))
+                  child: GestureDetector(
+                    onTap: () {
+                      box.remove("auth_user");
+                      Get.offNamed(
+                          AppRoutes.signUpScreen
+                      );
+                    },
+                    child: Row(children: [
+                      CustomIconButton(
+                          height: 40.adaptSize,
+                          width: 40.adaptSize,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(.1),
+                            borderRadius: BorderRadius.circular(20.h),
+                          ),
+                          padding: EdgeInsets.all(10.h),
+                          // decoration: IconButtonStyleHelper.fillGray,
+                          child: CustomImageView(
+                              imagePath: ImageConstant.imgIconlyTwoToneLogout)),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              left: 16.h, top: 12.v, bottom: 10.v),
+                          child: Text("lbl_log_out".tr,
+                              style: CustomTextStyles.labelLargeDMSansGray700))
+                    ]),
+                  ))
             ]));
   }
 
@@ -242,80 +279,25 @@ class SettignsScreen extends GetWidget<SettignsController> {
         decoration: AppDecoration.outlineBlack9003
             .copyWith(borderRadius: BorderRadiusStyle.roundedBorder4),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          _buildOffer(proposdelapplication: "lbl_support_d_aide".tr),
+          _buildOffer(proposdelapplication: "lbl_support_d_aide".tr, imagePath: ImageConstant.imgNotificationOnprimary),
           SizedBox(height: 25.v),
-          _buildOffer(proposdelapplication: "msg_propos_de_l_application".tr)
+          _buildOffer(proposdelapplication: "msg_propos_de_l_application".tr, imagePath: ImageConstant.imgOffer)
         ]));
   }
 
-  /// Section Widget
-  Widget _buildBottomBar() {
-    return SizedBox(
-        child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-          SizedBox(width: 161.h, child: Divider(indent: 53.h)),
-          Container(
-              padding: EdgeInsets.all(16.h),
-              decoration: AppDecoration.outlineBlack900
-                  .copyWith(borderRadius: BorderRadiusStyle.customBorderBL42),
-              child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomImageView(
-                        imagePath: ImageConstant.imgGroup100000463425x341,
-                        height: 25.v,
-                        width: 341.h,
-                        alignment: Alignment.center),
-                    SizedBox(height: 6.v),
-                    RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
-                              text: "lbl_profile3".tr,
-                              style: CustomTextStyles.labelMediumBlack900),
-                          TextSpan(text: "           ".tr),
-                          TextSpan(
-                              text: "lbl".tr,
-                              style: theme.textTheme.labelMedium),
-                          TextSpan(
-                              text: "lbl_param_tres4".tr,
-                              style: CustomTextStyles.labelMediumPrimary),
-                          TextSpan(text: "        ".tr),
-                          TextSpan(
-                              text: "lbl2".tr,
-                              style: theme.textTheme.labelMedium),
-                          TextSpan(
-                              text: "lbl_nouveau".tr,
-                              style: CustomTextStyles.labelMediumBlack900),
-                          TextSpan(text: " "),
-                          TextSpan(text: " "),
-                          TextSpan(text: "               ".tr),
-                          TextSpan(
-                              text: "lbl_demandes".tr,
-                              style: theme.textTheme.labelMedium),
-                          TextSpan(text: "      ".tr),
-                          TextSpan(
-                              text: "lbl_aide".tr,
-                              style: theme.textTheme.labelMedium)
-                        ]),
-                        textAlign: TextAlign.left),
-                    SizedBox(height: 2.v)
-                  ]))
-        ]));
-  }
 
   /// Common widget
-  Widget _buildOffer({required String proposdelapplication}) {
+  Widget _buildOffer({required String proposdelapplication, String? imagePath}) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       CustomIconButton(
           height: 40.adaptSize,
           width: 40.adaptSize,
           padding: EdgeInsets.all(10.h),
-          decoration: IconButtonStyleHelper.fillOnPrimary,
-          child: CustomImageView(imagePath: ImageConstant.imgOffer)),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.onPrimary.withOpacity(.1),
+            borderRadius: BorderRadius.circular(20.h),
+          ),
+          child: CustomImageView(imagePath: imagePath)),
       Padding(
           padding: EdgeInsets.only(left: 16.h, top: 10.v, bottom: 12.v),
           child: Text(proposdelapplication,

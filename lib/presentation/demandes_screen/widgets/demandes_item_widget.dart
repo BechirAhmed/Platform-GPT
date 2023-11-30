@@ -1,3 +1,6 @@
+import 'package:bgpt/core/database.dart';
+import 'package:intl/intl.dart';
+
 import '../controller/demandes_controller.dart';
 import '../models/demandes_item_model.dart';
 import 'package:bgpt/core/app_export.dart';
@@ -14,7 +17,7 @@ class DemandesItemWidget extends StatelessWidget {
           key: key,
         );
 
-  DemandesItemModel demandesItemModelObj;
+  Order? demandesItemModelObj;
 
   var controller = Get.find<DemandesController>();
 
@@ -45,19 +48,15 @@ class DemandesItemWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Obx(
-                    () => Text(
-                      demandesItemModelObj.demandeCounter!.value,
-                      style: CustomTextStyles.labelLargeTeal900,
-                    ),
+                  Text(
+                    "Demande ${demandesItemModelObj!.id}",
+                    style: CustomTextStyles.labelLargeTeal900,
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 2.v),
-                    child: Obx(
-                      () => Text(
-                        demandesItemModelObj.widget!.value,
-                        style: CustomTextStyles.labelMediumTeal900,
-                      ),
+                    child: Text(
+                      "${DateTime.parse(demandesItemModelObj!.created_date!).format('hh:mm dd-MM-yyyy')}",
+                      style: CustomTextStyles.labelMediumTeal900,
                     ),
                   ),
                 ],
@@ -67,20 +66,18 @@ class DemandesItemWidget extends StatelessWidget {
             Container(
               width: 316.h,
               margin: EdgeInsets.only(right: 20.h),
-              child: Obx(
-                () => Text(
-                  demandesItemModelObj.description!.value,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: CustomTextStyles.labelSmallPoppinsBluegray700,
-                ),
+              child: Text(
+                "${demandesItemModelObj!.nom_affaire}",
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: CustomTextStyles.labelSmallPoppinsBluegray700,
               ),
             ),
             SizedBox(height: 4.v),
             CustomElevatedButton(
               height: 18.v,
               width: 65.h,
-              text: "lbl_en_attend".tr,
+              text: "${demandesItemModelObj!.status}",
               margin: EdgeInsets.only(right: 8.h),
               leftIcon: Container(
                 margin: EdgeInsets.only(right: 6.h),

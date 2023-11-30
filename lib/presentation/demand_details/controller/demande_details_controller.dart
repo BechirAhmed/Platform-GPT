@@ -1,12 +1,14 @@
 import 'package:bgpt/core/app_export.dart';
-import 'package:bgpt/presentation/profile_one_screen/models/profile_one_model.dart';
+import 'package:bgpt/presentation/demand_details/models/demande_details_model.dart';
 import 'package:flutter/material.dart';
 
 /// A controller class for the ProfileOneScreen.
 ///
 /// This class manages the state of the ProfileOneScreen, including the
 /// current profileOneModelObj
-class ProfileOneController extends GetxController {
+class DemandDetailsController extends GetxController {
+  static DemandDetailsController get to => Get.find();
+
   TextEditingController vectorEditTextController = TextEditingController();
 
   TextEditingController mobileNoEditTextController = TextEditingController();
@@ -21,7 +23,7 @@ class ProfileOneController extends GetxController {
 
   TextEditingController weburlEditTextController3 = TextEditingController();
 
-  Rx<ProfileOneModel> profileOneModelObj = ProfileOneModel().obs;
+  Rx<DemandDetailsModel> profileOneModelObj = DemandDetailsModel().obs;
 
   @override
   void onClose() {

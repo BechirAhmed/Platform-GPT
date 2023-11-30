@@ -14,6 +14,7 @@ final Map<String, String> enUs = {
   "lbl_30_s": "30 s",
   "lbl_otp": "OTP",
   "lbl_s_inscrire2": "S’inscrire",
+  "lbl_s_next": "Suivant",
   "lbl_se_connecter2": "Se connecter",
   "lbl_verifier": "Verifier",
   "msg_bonjour_bienvenu": "Bonjour,Bienvenu ",

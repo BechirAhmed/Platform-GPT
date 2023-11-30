@@ -16,12 +16,12 @@ bool isValidPassword(
   }
 
   if (inputString != null && inputString.isNotEmpty) {
-    const pattern =
-        r'^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$';
-
-    final regExp = RegExp(pattern);
-
-    isInputStringValid = regExp.hasMatch(inputString);
+    // const pattern = r'^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$';
+    //
+    // final regExp = RegExp(pattern);
+    //
+    // isInputStringValid = regExp.hasMatch(inputString);
+    isInputStringValid = true;
   }
 
   return isInputStringValid;
@@ -39,7 +39,7 @@ bool isValidPhone(
   }
 
   if (inputString != null && inputString.isNotEmpty) {
-    if (inputString.length > 16 || inputString.length < 6) return false;
+    if (inputString.length > 16 || inputString.length < 8) return false;
 
     const pattern = r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$';
 

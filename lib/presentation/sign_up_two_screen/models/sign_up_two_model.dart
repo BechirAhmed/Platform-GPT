@@ -11,32 +11,50 @@ class SignUpTwoModel {
   Rx<List<SelectionPopupModel>> dropdownItemList = Rx([
     SelectionPopupModel(
       id: 1,
-      title: "Item One",
+      title: "Maroc",
       isSelected: true,
     ),
     SelectionPopupModel(
       id: 2,
-      title: "Item Two",
+      title: "Senegal",
     ),
     SelectionPopupModel(
       id: 3,
-      title: "Item Three",
+      title: "Algerie",
     )
   ]);
 
   Rx<List<SelectionPopupModel>> dropdownItemList1 = Rx([
     SelectionPopupModel(
       id: 1,
-      title: "Item One",
+      title: "Nouakchott",
       isSelected: true,
     ),
     SelectionPopupModel(
       id: 2,
-      title: "Item Two",
+      title: "Nouadhibou",
     ),
     SelectionPopupModel(
       id: 3,
-      title: "Item Three",
+      title: "Rosso",
     )
   ]);
+
+
+  Rx<List<SelectionPopupModel>> dropdownItemList2 = Rx([
+    SelectionPopupModel(
+      id: 1,
+      title: "Maroc",
+      isSelected: true,
+    ),
+    SelectionPopupModel(
+      id: 2,
+      title: "Senegal",
+    ),
+    SelectionPopupModel(
+      id: 3,
+      title: "Algerie",
+    )
+  ]);
+
 }

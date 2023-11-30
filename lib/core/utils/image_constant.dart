@@ -31,6 +31,8 @@ class ImageConstant {
   // Creation d'une demande  Two images
   static String imgGroup1000004648 = '$imagePath/img_group_1000004648.svg';
 
+  static String imgDialog = '$imagePath/dialog.png';
+
   static String imgVectorOnerrorcontainer =
       '$imagePath/img_vector_onerrorcontainer.svg';
 
